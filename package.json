@@ -1,0 +1,16 @@
+{
+  "name": "smart-board-app",
+  "version": "2.0.0",
+  "description": "السبورة الذكية - تطبيق أندرويد يعمل بدون إنترنت",
+  "scripts": {
+    "cap:init": "npx cap add android",
+    "cap:sync": "npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}

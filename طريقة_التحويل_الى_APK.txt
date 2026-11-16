@@ -1,0 +1,17 @@
+مشروع السبورة الذكية جاهز للتحويل إلى APK (Capacitor + GitHub Actions)
+
+الطريقة 1: البناء السحابي التلقائي بدون تثبيت أي برامج على جهازك (GitHub Actions)
+1. أنشئ حساباً مجانياً على GitHub.com وأنشئ مستودعاً جديداً (New Repository).
+2. ارفع جميع محتويات هذا المجلد (بما فيها مجلد .github ومجلد www وملفي package.json و capacitor.config.json) إلى المستودع.
+3. افتح تبويب Actions في المستودع، وستجد عملية بناء APK تعمل تلقائياً.
+4. بعد دقيقتين، اضغط على العملية المكتملة وحمّل ملف SmartBoard-APK من قسم Artifacts.
+
+الطريقة 2: البناء المحلي على جهازك (إذا كان لديك Node.js و Android Studio)
+1. افتح موجه الأوامر (Terminal) داخل هذا المجلد.
+2. نفّذ الأوامر التالية بالترتيب:
+   npm install
+   npx cap add android
+   npx cap sync android
+   npx cap open android
+3. من داخل Android Studio اختر من القائمة العلوية:
+   Build > Build Bundle(s) / APK(s) > Build APK(s)

@@ -1,0 +1,12 @@
+{
+  "appId": "com.smartboard.whiteboard",
+  "appName": "السبورة الذكية",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#e9eef1",
+    "allowMixedContent": true
+  }
+}
