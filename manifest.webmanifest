@@ -1,20 +1,16 @@
 {
   "id": "./",
-  "name": "سبورة رمزي — Ramzi Board",
-  "short_name": "سبورة رمزي",
-  "description": "سبورة ذكية تعمل بدون إنترنت: كتابة بالقلم، PDF وPowerPoint، كيمياء، رياضيات وفيزياء.",
+  "name": "السبورة الذكية",
+  "short_name": "السبورة",
+  "description": "سبورة تفاعلية تعمل بدون إنترنت لجميع المواد",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
   "orientation": "any",
-  "background_color": "#0f121a",
-  "theme_color": "#4f46e5",
+  "background_color": "#e9eef1",
+  "theme_color": "#0a7f73",
   "categories": [
     "education",
     "productivity"
@@ -33,32 +29,10 @@
       "purpose": "any"
     },
     {
-      "src": "icons/maskable-512.png",
+      "src": "icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    },
-    {
-      "src": "icons/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "icons/shot-wide.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "سبورة رمزي"
-    },
-    {
-      "src": "icons/shot-narrow.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "سبورة رمزي"
     }
   ]
 }
