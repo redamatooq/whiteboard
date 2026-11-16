@@ -25,7 +25,17 @@ jobs:
 
       - name: Install Capacitor & Add Android Platform
         run: |
+          echo "=== Repository Structure ==="
+          find . -maxdepth 3 -not -path '*/.*' -not -path './node_modules*'
+
           npm install
+          npm run build --if-present
+
+          if [ ! -d "www" ] && [ -f "index.html" ]; then
+            mkdir -p www
+            cp -r index.html manifest.webmanifest sw.js icons ocr css js assets www/ 2>/dev/null || true
+          fi
+
           if [ ! -d "android" ]; then
             if [ -f "node_modules/@capacitor/core/package.json" ]; then
               CAP_VER=$(node -p "require('./node_modules/@capacitor/core/package.json').version")
@@ -35,10 +45,38 @@ jobs:
             fi
             npx cap add android
           fi
-          mkdir -p android/app/src/main/res/mipmap-xxxhdpi
-          cp www/icons/icon-512.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png || true
-          cp www/icons/icon-512.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png || true
+
           npx cap sync android
+
+          ICON_SRC=$(find . -maxdepth 4 -not -path './node_modules/*' -not -path './android/*' \( -iname "icon-1024.png" -o -iname "icon-512.png" -o -iname "icon-192.png" \) | head -n 1)
+
+          if [ -z "$ICON_SRC" ]; then
+            echo "ERROR: لم يتم العثور على أي ملف أيقونة PNG داخل المستودع! تأكد من رفع مجلد icons."
+            exit 1
+          fi
+
+          echo "=== Found Icon: $ICON_SRC ==="
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
+
+          declare -A SIZES=(
+            ["mipmap-mdpi"]="48x48"
+            ["mipmap-hdpi"]="72x72"
+            ["mipmap-xhdpi"]="96x96"
+            ["mipmap-xxhdpi"]="144x144"
+            ["mipmap-xxxhdpi"]="192x192"
+          )
+
+          for dir in "${!SIZES[@]}"; do
+            TARGET="android/app/src/main/res/$dir"
+            mkdir -p "$TARGET"
+            if command -v convert >/dev/null 2>&1; then
+              convert "$ICON_SRC" -resize "${SIZES[$dir]}" "$TARGET/ic_launcher.png"
+              convert "$ICON_SRC" -resize "${SIZES[$dir]}" "$TARGET/ic_launcher_round.png"
+            else
+              cp "$ICON_SRC" "$TARGET/ic_launcher.png"
+              cp "$ICON_SRC" "$TARGET/ic_launcher_round.png"
+            fi
+          done
 
       - name: Build Debug APK
         run: |
